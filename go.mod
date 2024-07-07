@@ -1,4 +1,4 @@
-module github.com/kvitton
+module github.com/fwastring/kvitton
 
 go 1.22.3
 

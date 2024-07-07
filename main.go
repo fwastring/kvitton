@@ -8,7 +8,7 @@ import (
 	// "code.sajari.com/docconv"
 	"gopkg.in/gographics/imagick.v3/imagick"
 	"github.com/otiai10/gosseract/v2"
-	"github.com/fwastring/kvitton/shell"
+	"github.com/fwastring/kvitton"
 )
 
 func main() {
