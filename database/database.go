@@ -3,17 +3,28 @@ package database
 import(
 	"fmt"
 	"errors"
+	// "log"
 
 	badger "github.com/dgraph-io/badger/v4"
 )
 
-type Alert struct {
+type Item struct {
     Name     string  `json:"name"`
-    Instance  string  `json:"instance"`
+    Price  string  `json:"price"`
 }
 
-func GetAll() ([]Alert, error) {
-	var alerts []Alert
+// func InitDatabase() (*badger.DB) {
+// 	db, err := badger.Open(badger.DefaultOptions("./db"))
+// 	if err != nil {
+// 		log.Fatal(err)
+// 	}
+// 	defer db.Close()
+// 	return db
+// }
+
+// func GetAll(db *badger.DB) ([]Item, error) {
+func GetAll() ([]Item, error) {
+	var items []Item
 	err := db.View(func(txn *badger.Txn) error {
 	  opts := badger.DefaultIteratorOptions
 	  it := txn.NewIterator(opts)
@@ -22,9 +33,8 @@ func GetAll() ([]Alert, error) {
 		item := it.Item()
 		k := item.Key()
 		err := item.Value(func(v []byte) error {
-			alerts = append(alerts, Alert{Name: string(k), Instance: string(v)})
-		  // fmt.Printf("key=%s, value=%s\n", k, v)
-		  return nil
+			items = append(items, Item{Name: string(k), Price: string(v)})
+			return nil
 		})
 		if err != nil {
 		  return err
@@ -33,9 +43,9 @@ func GetAll() ([]Alert, error) {
 	  return nil
 	})
 	if err != nil {
-		return []Alert{}, err
+		return []Item{}, err
 	}
-	return alerts, nil
+	return items, nil
 }
 
 var db, err = badger.Open(badger.DefaultOptions("/tmp/badger"))
