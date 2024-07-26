@@ -26,3 +26,14 @@ jobs:
 
     - name: Test
       run: go test -v ./...
+
+    - name: Copy binary
+      uses: appleboy/scp-action@v0.1.7
+      with:
+        host: 62.63.222.22
+        username: fw
+        key: ${{ secrets.SSH_KEY }}
+        port: 55502
+        source: kvitton
+        target: /home/fw
+
