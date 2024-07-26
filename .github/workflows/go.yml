@@ -37,6 +37,6 @@ jobs:
         username: fw
         key: ${{ secrets.SSH_KEY }}
         port: 55502
-        source: run.sh
+        source: kvitton
         target: /home/fw
 
