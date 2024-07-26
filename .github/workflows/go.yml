@@ -28,7 +28,7 @@ jobs:
       run: go test -v ./...
 
     - name: Rename
-      run: mv kvitton run.sh
+      run: ls
 
     - name: Copy binary
       uses: appleboy/scp-action@v0.1.7
